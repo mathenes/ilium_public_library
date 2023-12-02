@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.5.0)
+      concurrent-ruby (~> 1.0)
     actioncable (7.1.2)
       actionpack (= 7.1.2)
       activesupport (= 7.1.2)
@@ -214,7 +216,6 @@ GEM
       psych (>= 4.0.0)
     redis (5.0.8)
       redis-client (>= 0.17.0)
-    redis-actionpack (0.0.0)
     redis-client (0.18.0)
       connection_pool
     regexp_parser (2.8.2)
@@ -309,6 +310,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  aasm
   bootsnap
   capybara
   cssbundling-rails
@@ -321,7 +323,6 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 7.1.2)
   redis (>= 4.0.1)
-  redis-actionpack
   rspec-rails (~> 6.1.0)
   rubocop
   rubocop-capybara

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>IliumPublicLibrary</title>
+    <title>Ilium Public Library</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,16 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div>
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% elsif alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+    </div>
+
+    <div>
+      <%= yield %>
+    </div>
   </body>
 </html>

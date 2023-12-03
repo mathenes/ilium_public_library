@@ -10,18 +10,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: true
+  validates :member, presence: true
 
-  before_validation :check_member
   after_initialize :set_member
 
   private
-
-  def check_member
-    return if member
-
-    errors.add(:member, "can't be blank")
-  end
 
   def set_member
     return if member

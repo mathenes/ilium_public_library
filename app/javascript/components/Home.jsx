@@ -25,7 +25,7 @@ export default function Home() {
             {currentUser.role
               && (
               <Link
-                to="/search"
+                to="/books/search"
                 className="btn btn-outline-secondary"
                 role="button"
               >

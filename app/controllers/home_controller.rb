@@ -3,5 +3,10 @@
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!
 
-  def index; end
+  def index
+    respond_to do |format|
+      format.json { render :index }
+      format.html
+    end
+  end
 end

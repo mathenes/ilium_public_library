@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
   <head>
     <title>Ilium Public Library</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -19,8 +19,12 @@
       <% end %>
     </div>
 
-    <div>
+    <%= render 'layouts/nav' %>
+
+    <div class="<%= devise_controller? ? 'd-flex flex-column align-items-center' : ''%>">
       <%= yield %>
     </div>
+  
+    <%= render 'layouts/footer' %>
   </body>
 </html>

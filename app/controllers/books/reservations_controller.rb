@@ -12,7 +12,7 @@ module Books
       if @reservation.save
         render json: @reservation
       else
-        render json: { msg: @reservation.errors.full_messages }, status: :unprocessable_entity
+        render json: { msg: @reservation.errors.full_messages.uniq }, status: :unprocessable_entity
       end
     end
 

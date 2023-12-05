@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-json.name current_user&.name
+json.email current_user&.email
 json.role current_user&.member&.role

@@ -11,14 +11,12 @@ RSpec.describe User, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
     it { is_expected.to validate_presence_of(:member) }
   end
 
   describe 'devise modules' do
-    it { is_expected.to have_db_column(:name).of_type(:string).with_options(null: false) }
     it { is_expected.to have_db_column(:email).of_type(:string).with_options(null: false) }
     it { is_expected.to have_db_column(:encrypted_password).of_type(:string) }
     it { is_expected.to have_db_column(:reset_password_token).of_type(:string) }
@@ -26,10 +24,6 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_db_column(:remember_created_at).of_type(:datetime) }
     it { is_expected.to have_db_column(:created_at).of_type(:datetime).with_options(null: false) }
     it { is_expected.to have_db_column(:updated_at).of_type(:datetime).with_options(null: false) }
-
-    it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:email) }
-    it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
   end
 
   describe 'callbacks' do

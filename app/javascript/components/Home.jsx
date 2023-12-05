@@ -15,7 +15,7 @@ export default function Home() {
     <div className="container d-flex flex-column align-items-center justify-content-center">
       <div className="d-flex align-items-center justify-content-center">
         <div className="p-5 mb-4 bg-body-tertiary rounded-3">
-          <h1 className="display-6 ms-2">{`Welcome${currentUser.name ? `, ${currentUser.name}` : ''}!`}</h1>
+          <h1 className="display-6 ms-2">{`Welcome${currentUser.email ? `, ${currentUser.email}` : ''}!`}</h1>
           <div className="container-fluid py-5">
             <h1 className="display-4">Ilium Public Library</h1>
             <p className="lead">

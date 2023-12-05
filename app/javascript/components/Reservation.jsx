@@ -51,7 +51,7 @@ export default function ReservationSearch() {
       setErrors([]);
       setSuccess(true);
       setReservation(response);
-    }).catch((err) => setErrors([...errors, err.message]));
+    }).catch((err) => setErrors([err.message]));
   };
 
   const backUrl = () => {
@@ -127,9 +127,8 @@ export default function ReservationSearch() {
               && <button type="button" className="btn btn-success mt-3 me" onClick={() => performAction('deliver_book')}>Deliver Book</button>}
 
             {errors.length > 0 && errors.map((error) => (
-              <div key={error} className="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+              <div key={error} className="alert alert-danger show mt-3" role="alert">
                 {error}
-                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" />
               </div>
             ))}
 

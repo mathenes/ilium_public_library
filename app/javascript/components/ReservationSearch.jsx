@@ -6,7 +6,7 @@ export default function ReservationSearch() {
   // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
   const [reservationToken, setReservationToken] = useState(searchParams.get('reservation_token') || '');
-  const [errors, setErrors] = useState('');
+  const [errors, setErrors] = useState([]);
 
   const search = () => {
     const baseUrl = '/reservations';
@@ -26,7 +26,7 @@ export default function ReservationSearch() {
         throw new Error(error.msg);
       })
       .then((res) => navigate(`/reservations/${res.reservation_token}`))
-      .catch((err) => setErrors(err.message));
+      .catch((err) => setErrors([err.message]));
   };
 
   return (
@@ -45,12 +45,11 @@ export default function ReservationSearch() {
 
             <button type="button" className="btn btn-primary" onClick={search}>Search</button>
 
-            {errors
-             && (
-             <div className="alert alert-danger show mt-3" role="alert">
-               {errors}
-             </div>
-             )}
+            {errors.length > 0 && errors.map((error) => (
+              <div key={error} className="alert alert-danger show mt-3" role="alert">
+                {error}
+              </div>
+            ))}
           </div>
         </div>
       </main>

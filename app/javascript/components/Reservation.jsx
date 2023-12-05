@@ -91,11 +91,6 @@ export default function ReservationSearch() {
               <h2 className="text-body-emphasis mt-4">Member Info</h2>
               <hr className="col-4 col-md-6 mb-2" />
               <p className="lead">
-                <code>Name:</code>
-                {' '}
-                {reservation.user.name}
-              </p>
-              <p className="lead">
                 <code>Email:</code>
                 {' '}
                 {reservation.user.email}

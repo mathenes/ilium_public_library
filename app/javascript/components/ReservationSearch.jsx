@@ -6,24 +6,27 @@ export default function ReservationSearch() {
   // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
   const [reservationToken, setReservationToken] = useState(searchParams.get('reservation_token') || '');
+  const [errors, setErrors] = useState('');
 
   const search = () => {
     const baseUrl = '/reservations';
     const completeUrl = `${baseUrl}?reservation_token=${reservationToken}`;
+    setErrors('');
 
     fetch(completeUrl, {
       headers: {
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => {
+      .then(async (response) => {
         if (response.ok) {
           return response.json();
         }
-        throw new Error('Network response was not ok.');
+        const error = await response.json();
+        throw new Error(error.msg);
       })
       .then((res) => navigate(`/reservations/${res.reservation_token}`))
-      .catch(() => navigate('/'));
+      .catch((err) => setErrors(err.message));
   };
 
   return (
@@ -41,6 +44,13 @@ export default function ReservationSearch() {
             </div>
 
             <button type="button" className="btn btn-primary" onClick={search}>Search</button>
+
+            {errors
+             && (
+             <div className="alert alert-danger show mt-3" role="alert">
+               {errors}
+             </div>
+             )}
           </div>
         </div>
       </main>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
   <head>
     <title>Ilium Public Library</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "react-datepicker", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
@@ -19,8 +20,12 @@
       <% end %>
     </div>
 
-    <div>
+    <%= render 'layouts/nav' %>
+
+    <div class="<%= devise_controller? ? 'd-flex flex-column align-items-center' : ''%>">
       <%= yield %>
     </div>
+  
+    <%= render 'layouts/footer' %>
   </body>
 </html>

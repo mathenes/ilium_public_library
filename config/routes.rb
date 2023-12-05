@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'home/index'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -10,6 +9,12 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   resources :home, only: :index
+  namespace :books do
+    resources :search, only: :index
+  end
+  resources :books, only: %i[show] do
+    resources :reservations, only: :create, controller: 'books/reservations'
+  end
   # Defines the root path route ("/")
   root 'home#index'
 end

@@ -3,6 +3,7 @@ import {
   Link, useNavigate, useParams, useSearchParams,
 } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
+import moment from 'moment-timezone';
 
 function Book() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function Book() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [book, setBook] = useState({});
   const [reservation, setReservation] = useState({});
-  const [date, setDate] = useState(new Date());
+  const [pickUpTime, setPickUpTime] = useState(new Date());
   const [errors, setErrors] = useState('');
 
   useEffect(() => {
@@ -28,13 +29,16 @@ function Book() {
   }, [params.id]);
 
   const reserve = () => {
-    const body = {
-      reservation: {
-        pick_up_time: date,
-      },
-    };
+    const convertedDateToServerTimezone = moment(pickUpTime).tz('Canada/Central', true);
     const url = `/books/${params.id}/reservations`;
     const token = document.querySelector('meta[name="csrf-token"]').content;
+
+    const body = {
+      reservation: {
+        pick_up_time: convertedDateToServerTimezone,
+      },
+    };
+
     fetch(url, {
       method: 'POST',
       headers: {
@@ -97,8 +101,7 @@ function Book() {
                     maxTime={new Date(0, 0, 0, 18, 0)}
                     dateFormat="MMMM d, yyyy h:mmaa"
                     locale="en"
-                    selected={date}
-                    onChange={(val) => setDate(val)}
+                    onChange={(date) => setPickUpTime(date)}
                     className="form-control me-5"
                   />
                 </div>

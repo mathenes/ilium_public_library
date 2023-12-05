@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Link, useNavigate, useParams, useSearchParams,
+  useNavigate, useParams, useSearchParams,
 } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import moment from 'moment-timezone';
@@ -70,7 +70,7 @@ export default function Book() {
   return (
     <div className="col-lg-8 mx-auto p-4 py-md-5">
       <div className="mb-3">
-        <GoBack backUrl={backUrl} />
+        <GoBack backUrl={backUrl()} />
       </div>
       <main>
         <h1 className="text-body-emphasis">{book.title}</h1>

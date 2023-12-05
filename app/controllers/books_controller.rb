@@ -4,14 +4,10 @@ class BooksController < ApplicationController
   before_action :load_book
 
   def show
+    authorize @book || Book
+
     respond_to do |format|
-      format.json do
-        if @book
-          render :show
-        else
-          render json: { msg: 'Not found' }, status: :not_found
-        end
-      end
+      format.json { @book ? render(:show) : render(json: { msg: 'Not found' }, status: :not_found) }
       format.html
     end
   end

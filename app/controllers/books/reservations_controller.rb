@@ -6,6 +6,8 @@ module Books
 
     def create
       @reservation = @book.reservations.build(reservation_params)
+      authorize @reservation
+
       @reservation.user = current_user
       if @reservation.save
         render json: @reservation

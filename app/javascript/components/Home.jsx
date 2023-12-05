@@ -22,16 +22,26 @@ export default function Home() {
               A book loan system that allows library members to reserve and schedule a pickup time.
             </p>
             <hr className="my-4" />
-            {currentUser.role
-              && (
+            {currentUser.role === 'library_clerk'
+            && (
               <Link
-                to="/books/search"
+                to="/reservations"
                 className="btn btn-outline-secondary"
                 role="button"
               >
-                Search & Reserve Books
+                Manage Book Reservation
               </Link>
-              )}
+            )}
+            {currentUser.role === 'library_member'
+            && (
+            <Link
+              to="/books/search"
+              className="btn btn-outline-secondary"
+              role="button"
+            >
+              Search & Reserve Books
+            </Link>
+            )}
           </div>
         </div>
       </div>

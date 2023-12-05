@@ -12,10 +12,10 @@ class Reservation < ApplicationRecord
   validates :pick_up_time, presence: true
   validates :state, presence: true
 
-  validates_comparison_of :pick_up_time, greater_than: -> { Time.zone.now }
-  validate :book_availability
-  validate :user_with_same_book
-  validate :pick_up_at_working_hours
+  validates_comparison_of :pick_up_time, greater_than: -> { Time.zone.now }, on: :create
+  validate :book_availability, on: :create
+  validate :user_with_same_book, on: :create
+  validate :pick_up_at_working_hours, on: :create
 
   aasm column: 'state' do
     state :reserved, initial: true

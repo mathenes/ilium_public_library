@@ -66,8 +66,7 @@ RSpec.describe Reservation, type: :model do
         it 'allows a book to be reserved if some reserved copy gets canceled' do
           described_class.last.cancel!
           reservation = build(:reservation, book:)
-          reservation.valid?
-          expect(reservation.errors[:book]).to include('has no copies available.')
+          expect(reservation.valid?).to be true
         end
       end
 
@@ -83,8 +82,7 @@ RSpec.describe Reservation, type: :model do
         it 'allows a book to be reserved if some lent copy gets delivered' do
           described_class.last.deliver_book!
           reservation = build(:reservation, book:)
-          reservation.valid?
-          expect(reservation.errors[:book]).to include('has no copies available.')
+          expect(reservation.valid?).to be true
         end
       end
     end

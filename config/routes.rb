@@ -9,12 +9,14 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   resources :home, only: :index
+  resources :reservations, only: %i[index show update], param: :reservation_token
   namespace :books do
     resources :search, only: :index
   end
   resources :books, only: %i[show] do
     resources :reservations, only: :create, controller: 'books/reservations'
   end
+
   # Defines the root path route ("/")
   root 'home#index'
 end

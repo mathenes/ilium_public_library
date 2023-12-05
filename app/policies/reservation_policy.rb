@@ -10,6 +10,18 @@ class ReservationPolicy < ApplicationPolicy
   end
   # rubocop:enable Lint/MissingSuper
 
+  def index?
+    user.member.library_clerk?
+  end
+
+  def show?
+    index?
+  end
+
+  def update?
+    index?
+  end
+
   def create?
     user.member.library_member?
   end

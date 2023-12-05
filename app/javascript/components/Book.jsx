@@ -4,8 +4,9 @@ import {
 } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import moment from 'moment-timezone';
+import GoBack from './utils/GoBack';
 
-function Book() {
+export default function Book() {
   const navigate = useNavigate();
   const params = useParams();
   // eslint-disable-next-line no-unused-vars
@@ -69,15 +70,7 @@ function Book() {
   return (
     <div className="col-lg-8 mx-auto p-4 py-md-5">
       <div className="mb-3">
-        <Link
-          to={backUrl()}
-          className="btn btn-secondary"
-          role="button"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-return-left" viewBox="0 0 16 16">
-            <path fillRule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5" />
-          </svg>
-        </Link>
+        <GoBack backUrl={backUrl} />
       </div>
       <main>
         <h1 className="text-body-emphasis">{book.title}</h1>
@@ -151,5 +144,3 @@ function Book() {
     </div>
   );
 }
-
-export default Book;

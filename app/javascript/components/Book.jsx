@@ -12,8 +12,8 @@ function Book() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [book, setBook] = useState({});
   const [reservation, setReservation] = useState({});
-  const [pickUpTime, setPickUpTime] = useState(new Date());
-  const [errors, setErrors] = useState('');
+  const [pickUpTime, setPickUpTime] = useState('');
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     const url = `/books/${params.id}`;
@@ -52,8 +52,10 @@ function Book() {
       }
       const text = await response.json();
       throw new Error(text.msg);
-    }).then((response) => setReservation(response))
-      .catch((err) => setErrors(err.message));
+    }).then((response) => {
+      setErrors([]);
+      setReservation(response);
+    }).catch((err) => setErrors([...errors, err.message]));
   };
 
   const backUrl = () => {
@@ -101,6 +103,7 @@ function Book() {
                     maxTime={new Date(0, 0, 0, 18, 0)}
                     dateFormat="MMMM d, yyyy h:mmaa"
                     locale="en"
+                    selected={pickUpTime}
                     onChange={(date) => setPickUpTime(date)}
                     className="form-control me-5"
                   />
@@ -108,13 +111,12 @@ function Book() {
 
                 <button type="button" className="btn btn-primary btn-lg px-4" onClick={reserve}>Reserve</button>
 
-                {errors
-                  && (
+                {errors.length > 0 && errors.map((error) => (
                   <div className="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-                    {errors}
+                    {error}
                     <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" />
                   </div>
-                  )}
+                ))}
 
                 {reservation.reservation_token
                   && (
